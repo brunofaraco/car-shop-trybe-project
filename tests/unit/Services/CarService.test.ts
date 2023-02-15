@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import { Model } from 'mongoose';
 
 import { carModelReturn, carReqBody } from '../Mocks/CarMock';
-import CarService from '../../../src/Services/CarService';
+import CarService from '../../../src/Services/Car.service';
 
 describe('Cars service tests', function () {
   it('Insert a car sucessfully in DB', async function () {

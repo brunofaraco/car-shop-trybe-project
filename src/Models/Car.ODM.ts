@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose';
 import ICar from '../Interfaces/ICar';
-import AbstractODM from './AbstractODM';
+import AbstractODM from './Abstract.ODM';
 
 class CarODM extends AbstractODM<ICar> {
   constructor() {
