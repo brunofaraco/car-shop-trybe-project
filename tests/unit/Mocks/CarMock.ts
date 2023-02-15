@@ -9,7 +9,7 @@ const carReqBody = {
 };
 
 const carModelReturn = {
-  id: '',
+  id: '6348513f34c397abcad040b2',
   ...carReqBody,
 };
 
