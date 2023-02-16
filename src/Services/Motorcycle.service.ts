@@ -30,19 +30,19 @@ class MotorcycleService {
   public async findById(id: string): Promise<Motorcycle | null> {
     if (!isValidObjectId(id)) throw new ErrorMiddleware(422, 'Invalid mongo id');
 
-    const car = await this.motorcycleODM.findById(id);
-    if (!car) throw new ErrorMiddleware(404, 'Car not found');
+    const motorcycle = await this.motorcycleODM.findById(id);
+    if (!motorcycle) throw new ErrorMiddleware(404, 'Motorcycle not found');
 
-    return this._createMotorcycleDomain(car);
+    return this._createMotorcycleDomain(motorcycle);
   }
 
   public async updateById(id: string, updateData: Partial<Motorcycle>): Promise<Motorcycle | null> {
     if (!isValidObjectId(id)) throw new ErrorMiddleware(422, 'Invalid mongo id');
 
-    const updatedCar = await this.motorcycleODM.updateById(id, updateData);
-    if (!updatedCar) throw new ErrorMiddleware(404, 'Car not found');
+    const updatedMotorcycle = await this.motorcycleODM.updateById(id, updateData);
+    if (!updatedMotorcycle) throw new ErrorMiddleware(404, 'Motorcycle not found');
 
-    return this._createMotorcycleDomain(updatedCar);
+    return this._createMotorcycleDomain(updatedMotorcycle);
   }
 }
 
