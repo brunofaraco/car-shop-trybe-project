@@ -13,7 +13,13 @@ const carModelReturn = {
   ...carReqBody,
 };
 
+const carFind = [carModelReturn];
+
+const carFindById = carModelReturn;
+
 export {
   carReqBody,
   carModelReturn,
+  carFind,
+  carFindById,
 };
