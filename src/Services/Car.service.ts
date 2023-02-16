@@ -1,6 +1,8 @@
+import { isValidObjectId } from 'mongoose';
 import Car from '../Domains/Car';
 import ICar from '../Interfaces/ICar';
 import CarODM from '../Models/CarODM';
+import ErrorMiddleware from '../Utils/PersonalError';
 
 class CarService {
   public carODM: CarODM;
@@ -26,7 +28,10 @@ class CarService {
   }
 
   public async findById(id: string): Promise<Car | null> {
+    if (!isValidObjectId(id)) throw new ErrorMiddleware(422, 'Invalid mongo id');
+
     const car = await this.carODM.findById(id);
+    if (!car) throw new ErrorMiddleware(404, 'Car not found');
 
     return this._createCarDomain(car);
   }

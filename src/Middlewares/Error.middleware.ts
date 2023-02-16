@@ -2,7 +2,7 @@ import { NextFunction, Request, Response, ErrorRequestHandler } from 'express';
 import PersonalError from '../Utils/PersonalError';
 
 const errorHandler: ErrorRequestHandler = (
-  error: Error & Partial<PersonalError>,
+  error: Error & PersonalError,
   _req: Request,
   res: Response,
   _next: NextFunction,
