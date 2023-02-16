@@ -19,14 +19,16 @@ class CarService {
     return this._createCarDomain(newCar);
   }
 
-  public async find(): Promise<Car> {
+  public async find(): Promise<(Car | null)[]> {
     const cars = await this.carODM.find();
 
-    return this._createCarDomain(cars);
+    return cars.map((car) => this._createCarDomain(car));
   }
 
-  public async findById(id): Promise<Car> {
-    
+  public async findById(id: string): Promise<Car | null> {
+    const car = await this.carODM.findById(id);
+
+    return this._createCarDomain(car);
   }
 }
 
