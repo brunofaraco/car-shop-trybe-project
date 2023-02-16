@@ -19,13 +19,13 @@ abstract class AbstractODM<T> {
     return this.model.find();
   }
 
-  public async findById(id: string): Promise<T | null> {
-    return this.model.findById({ _id: id });
+  public async findById(_id: string): Promise<T | null> {
+    return this.model.findById({ _id });
   }
 
-  public async updateById(id: string, dataToUpdate: Partial<T>): Promise<T | null> {
+  public async updateById(_id: string, dataToUpdate: Partial<T>): Promise<T | null> {
     return this.model.findByIdAndUpdate(
-      { id },
+      { _id },
       { ...dataToUpdate } as UpdateQuery<T>,
       { new: true },
     );
