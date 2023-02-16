@@ -35,6 +35,15 @@ class CarService {
 
     return this._createCarDomain(car);
   }
+
+  public async updateById(id: string, updateData: Partial<Car>): Promise<Car | null> {
+    if (!isValidObjectId(id)) throw new ErrorMiddleware(422, 'Invalid mongo id');
+
+    const updatedCar = await this.carODM.updateById(id, updateData);
+    if (!updatedCar) throw new ErrorMiddleware(404, 'Car not found');
+
+    return this._createCarDomain(updatedCar);
+  }
 }
 
 export default CarService;
