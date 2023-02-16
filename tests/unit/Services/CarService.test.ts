@@ -70,4 +70,26 @@ describe('Cars service tests', function () {
 
     expect(result).to.be.deep.equal(updatedCar);
   });
+
+  it(`Return the right error statusCode and message when the ID is not valid
+  through method PUT in route /cars/:id`, async function () {
+    try {
+      await carService.updateById('');
+    } catch (error) {
+      expect((error as PersonalError).statusCode).to.be.deep.equal(INVALID_ID_STATUSCODE);
+      expect((error as PersonalError).message).to.be.deep.equal(INVALID_MONGO_ID);
+    }
+  });
+
+  it(`Return the right error statusCode and message when the CAR is NOT FOUND
+  through method PUT in route /cars/:id`, async function () {
+    sinon.stub(Model, 'findByIdAndUpdate').resolves();
+
+    try {
+      await carService.updateById(VALID_ID);
+    } catch (error) {
+      expect((error as PersonalError).statusCode).to.be.deep.equal(CAR_NOT_FOUND_STATUSCODE);
+      expect((error as PersonalError).message).to.be.deep.equal(CAR_NOT_FOUND_MESSAGE);
+    }
+  });
 });
