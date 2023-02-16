@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
 
-import { carModelReturn, carReqBody, carFind, carFindById } from '../Mocks/CarMock';
+import { carModelReturn, carReqBody, carFind, carFindById, updatedCar } from '../Mocks/CarMock';
 import CarService from '../../../src/Services/Car.service';
 import PersonalError from '../../../src/Utils/PersonalError';
 
@@ -63,7 +63,11 @@ describe('Cars service tests', function () {
     }
   });
 
-  it('Update a car by ID through method GET in route /cars/:id', async function () {
-    sinon.stub(Model, 'findByIdAndUpdate').resolves();
+  it('Update a car by ID through method PUT in route /cars/:id', async function () {
+    sinon.stub(Model, 'findByIdAndUpdate').resolves(updatedCar);
+
+    const result = await carService.findByIdAndUpdate('6348513f34c397abcad040b2');
+
+    expect(result).to.be.deep.equal(updatedCar);
   });
 });
