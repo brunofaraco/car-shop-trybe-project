@@ -54,10 +54,10 @@ class CarController {
   public async updateById() {
     try {
       const { id } = this.req.params;
-
+      
       const updatedCar = await this.service.updateById(id, this.req.body);
 
-      return this.res.status(201).json(updatedCar);
+      return this.res.status(200).json(updatedCar);
     } catch (error) {
       this.next(error);
     }
