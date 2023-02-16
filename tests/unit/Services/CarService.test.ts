@@ -33,7 +33,7 @@ describe('Cars service tests', function () {
     expect(result).to.be.deep.equal(carFind);
   });
 
-  it('Get a car by id through method GET in route /cars/:ID', async function () {
+  it('Get a car by ID through method GET in route /cars/:id', async function () {
     sinon.stub(Model, 'findById').resolves(carFindById);
 
     const result = await carService.findById(VALID_ID);
@@ -61,5 +61,9 @@ describe('Cars service tests', function () {
       expect((error as PersonalError).statusCode).to.be.deep.equal(CAR_NOT_FOUND_STATUSCODE);
       expect((error as PersonalError).message).to.be.deep.equal(CAR_NOT_FOUND_MESSAGE);
     }
+  });
+
+  it('Update a car by ID through method GET in route /cars/:id', async function () {
+    sinon.stub(Model, 'findByIdAndUpdate').resolves();
   });
 });
