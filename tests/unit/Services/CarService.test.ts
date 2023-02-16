@@ -66,7 +66,7 @@ describe('Cars service tests', function () {
   it('Update a car by ID through method PUT in route /cars/:id', async function () {
     sinon.stub(Model, 'findByIdAndUpdate').resolves(updatedCar);
 
-    const result = await carService.findByIdAndUpdate('6348513f34c397abcad040b2');
+    const result = await carService.updateById(VALID_ID, updatedCar);
 
     expect(result).to.be.deep.equal(updatedCar);
   });
@@ -74,7 +74,7 @@ describe('Cars service tests', function () {
   it(`Return the right error statusCode and message when the ID is not valid
   through method PUT in route /cars/:id`, async function () {
     try {
-      await carService.updateById('');
+      await carService.updateById('', {});
     } catch (error) {
       expect((error as PersonalError).statusCode).to.be.deep.equal(INVALID_ID_STATUSCODE);
       expect((error as PersonalError).message).to.be.deep.equal(INVALID_MONGO_ID);
@@ -86,7 +86,7 @@ describe('Cars service tests', function () {
     sinon.stub(Model, 'findByIdAndUpdate').resolves();
 
     try {
-      await carService.updateById(VALID_ID);
+      await carService.updateById(VALID_ID, updatedCar);
     } catch (error) {
       expect((error as PersonalError).statusCode).to.be.deep.equal(CAR_NOT_FOUND_STATUSCODE);
       expect((error as PersonalError).message).to.be.deep.equal(CAR_NOT_FOUND_MESSAGE);
